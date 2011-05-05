@@ -86,8 +86,6 @@ class Network(models.Model):
 class Range(models.Model):
     parent = models.ForeignKey(
         Network, verbose_name='Parent' )
-    name = models.CharField(
-        'Range Name', max_length=50)
     description = models.CharField(
         'Beschreibung', max_length=200)
     comment = models.CharField(
@@ -98,7 +96,7 @@ class Range(models.Model):
         'Stop IP', help_text="Please use the following format: <em>xxx.xxx.xxx.xxx</em>.")
 
     def __unicode__(self):
-        return '/'.join([self.name, str(self.cidr)])
+        return '-'.join([self.start_ip, self.stop_ip])
 
 class IpAddress(models.Model):
     network = models.ForeignKey(Network, verbose_name='Netz ID')
