@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
@@ -73,12 +74,15 @@ class Network(models.Model):
     parent = models.ForeignKey(
         'Network', null=True, blank=True,
         verbose_name='Parent' )
+    netgroup = models.ForeignKey(
+        Netgroup, null=True, blank=True,
+        verbose_name='Net Group' )
     vlan = models.ForeignKey(
         'Vlan', null=True, blank=True)
     def_net_size= models.IntegerField(
-         'default net size', validators=[MaxValueValidator(128)], blank=True)
+         'default net size', validators=[MaxValueValidator(128)], blank=True, null=True)
     def_alloc_size= models.IntegerField(
-         'default allocation size', validators=[MaxValueValidator(128)], blank=True)
+         'default allocation size', validators=[MaxValueValidator(128)], blank=True, null=True)
 
     def __unicode__(self):
         return '/'.join([self.name, str(self.cidr)])
@@ -98,6 +102,13 @@ class Range(models.Model):
     def __unicode__(self):
         return '-'.join([self.start_ip, self.stop_ip])
 
+class Vlan(models.Model):
+    vlan_id = models.IntegerField()
+    name = models.CharField(
+        'Vlan Name', max_length=200)
+    def __unicode__(self):
+        return "%s (%d)" % (self.name, self.vlan_id)
+
 class IpAddress(models.Model):
     network = models.ForeignKey(Network, verbose_name='Netz ID')
     range = models.ForeignKey(Range, verbose_name='Range', blank=True, null=True)
@@ -113,12 +124,12 @@ class IpAddress(models.Model):
         
     
 class Ip4Address(IpAddress):
-    address = models.IpAddressField(
+    address = models.IPAddressField(
         'IPv4 Adresse', 
         help_text="Please use the following format: <em>xxx.xxx.xxx.xxx</em>.")
 
     def __unicode__(self):
-        return '/'.join([self.address, str(self.cidr)])
+        return self.address
 
 class Ip6Address(IpAddress):
     address = models.CharField(
