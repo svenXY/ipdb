@@ -1,0 +1,91 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'mgt/formate.css' %}" />
+
+<h3>IP Adresse {{ ipaddress.address }} - Details</h3>
+<table>
+    <tr>
+        <td style="background-color:silver"><a href="{{ipaddress.id }}/edit">&Auml;ndern</a></td>
+        <td style="background-color:silver"><a href="{{ipaddress.id }}/del"  onclick="return confirm('Wirklich die IP- Adresse löschen?');">L&ouml;schen</a></td>
+    </tr>
+</table>
+<br>
+<table>
+    <tr>
+        <th>Adresse</th>
+        <td>{{ ipaddress.address }}</td>
+    </tr>
+    <tr>
+        <th>Interface Name</th>
+        <td>{{ ipaddress.name }}</td>
+    </tr>
+    <tr>
+        <th>Status</th>
+        <td>{{ ipaddress.status }}</td>
+    </tr>
+<tr>
+    <th>Netzwerk</th>
+    <td>{{ ipaddress.range.parent.name }}/{{ipaddress.range.parent.cidr }}</td>
+    <td>{{ ipaddress.range.parent.comment }}</td>
+</tr>
+<tr>
+    <th>VLan</th>
+    <td>{{ ipaddress.range.parent.vlan }}</td>
+</tr>
+<tr>
+    <th>Range</th>
+    <td>{{ ipaddress.range.description }}</td>
+    <td>{{ ipaddress.range.comment }}</td>
+</tr>
+    <tr>
+        <th>Interface-Typ</th>
+        <td>
+            {% if ipaddress.base_interface %}
+                Basis Interface
+            {% else %}
+                Service Interface
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <th>Global?</th>
+        <td>
+            {% if ipaddress.global_interface %}
+                Ja
+            {% else %}
+                Nein
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <th>Zweck</th>
+        <td colspan=2>{{ ipaddress.purpose }}</td>
+    </tr>
+    <tr>
+        <th>Konfig-Info</th>
+        <td colspan=2>{{ ipaddress.config }}</td>
+    </tr>
+</table>
+<hr>
+<h3>Hosts</h3>
+<ul>
+{% if ipaddress.host.all %}
+{% for host in ipaddress.host.all %}
+    <li><a href="{% url 'host_detail' host.id %}">{{ host.name }}</a> (i/f# {{ipaddress.interface}})</li>
+{% endfor %}
+{% else %}
+    <li>Dieses Interface ist f&uuml;r keinen Host konfiguriert.
+{% endif %}
+</ul>
+
+<hr>
+<table class="metadate">
+<tr>
+<td>erstellt</td><td>{{ ipaddress.created }}</td>
+</tr>
+<tr>
+<td>zuletzt ge&auml;ndert</td><td>{{ ipaddress.modified }} (vor {{ ipaddress.modified|timesince }})</td>
+</tr>
+</table>
+<hr>
+

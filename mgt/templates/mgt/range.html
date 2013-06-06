@@ -1,0 +1,22 @@
+Range {{range.description}}<br>
+IP-Bereich von {{range.start_ip}} bis {{range.stop_ip}}<br>
+
+{% if ip_list %}
+<table>
+  <tr>
+    <th>address</th><th>name</th><th>host</th><th>status</th><th>purpose</th>
+  </tr>
+{% for ip in ip_list %}
+  <tr>
+    <td>{{ ip.address }}</td>
+    <td>{{ ip.name }}</td>
+    <td>{{ ip.host }}</td>
+    <td>{{ ip.status }}</td>
+    <td>{{ ip.purpose }}</td>
+  </tr>
+{% endfor %}
+</table>
+{% else %}
+<p>No addresses.</p>
+{% endif %}
+

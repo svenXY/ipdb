@@ -1,5 +1,9 @@
 # Django settings for ipdb project.
 
+import os
+ROOT_PATH = os.path.dirname(__file__)
+
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -12,7 +16,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'ipdb.db',                      # Or path to database file if using sqlite3.
+        'NAME': os.path.join(ROOT_PATH, 'ipdb.db'),   # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -60,18 +64,19 @@ STATIC_ROOT = ''
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/static/'
+STATIC_URL = os.path.join(ROOT_PATH, '/static/')
 
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
 # Examples: "http://foo.com/static/admin/", "/static/admin/".
-ADMIN_MEDIA_PREFIX = '/static/admin/'
+ADMIN_MEDIA_PREFIX = os.path.join(ROOT_PATH, '/static/admin/')
 
 # Additional locations of static files
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(ROOT_PATH, '/static/'),
 )
 
 # List of finder classes that know how to find static files in
@@ -98,14 +103,16 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'middleware.StripWhitespaceMiddleware',
 )
 
-ROOT_URLCONF = 'ipdb.urls'
+ROOT_URLCONF = 'ipdb_neu.urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(ROOT_PATH, 'templates'),
 )
 
 INSTALLED_APPS = (
@@ -117,6 +124,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.admindocs',
+    'mptt',
     'mgt',
 )
 

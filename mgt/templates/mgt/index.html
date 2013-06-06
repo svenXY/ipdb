@@ -1,0 +1,99 @@
+{% load mptt_tags %}
+{% load staticfiles %}
+{% load ip_filter %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'mgt/formate.css' %}">
+<script type="text/javascript" src="{% static 'mgt/jquery.js' %}"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+		// Toggle visibility of sub-elements
+		$("div.tree table").click(function() {
+				$(this).parent().children().filter('div').toggle('fast');
+		});
+		// Toggle visibility of ip table
+		$("tr.range").click(function() {
+				$(this).parent().parent().next().toggle('fast');
+		});
+});
+
+</script>
+
+<body class="defaults">
+
+<h3>The Denic Network Tree</h3>
+
+
+  {% recursetree net_list %}
+  <div class="tree tree-indent-{{node.level}}">
+		<table class="tree-all">
+			<tr class="{{node.type}}">
+				<td class="tw-{{node.level}}">{{ node.name }}/{{ node.cidr }}</td>
+				<td>{{ node.description }}</td>
+	 	    </tr>
+	    </table>
+	{% for range in node.range_set.all %}
+   <div class="tree tree-indent-1">
+	   <table class="tree-all">
+		   <tr class="range">
+			  <td class="tw-{{node.level|add:'1'}}">{{range.description}}</td>
+			  <td>{{range.comment}}</td>
+			</tr>
+	  </table>
+      <table class='iptable'>
+  		{% for addr in range.ipaddress_set.all %}
+  		{% if forloop.first %}
+  		<tr class="tree-all tree-subhead">
+    		<td style="width:60px;">
+      			<a href="/mgt/range/{{ range.id }}/add/">
+					<img src="{% static "mgt/images/add.gif" %}" title="add" align="right"/>
+      			</a>
+    		</td>
+    		<td style="width:30px;">IP</td>
+    		<td class="tree-status" style="width:15px;"></td>
+
+    		<td style="width:150px;">iface name</td>
+    		<td style="width:150px;">hosts</td>
+    		<td style="width:30px;">i/f #</td>
+    		<td style="width:250px;">config</td>
+    		<td style="width:250px;">comments</td>
+  		</tr>
+  		{% endif %}
+  		<tr class="tree-all">
+      		<td class="tree-indent" style="text-align:right;">
+       			<a href="/mgt/ip/{{ addr.id }}/edit"><img src="{% static "mgt/images/edit.gif" %}" title="edit" /></a>
+       			<a href="/mgt/ip/{{ addr.id }}/del"  onclick="return confirm('Wirklich die IP Adresse {{ addr.address }} l&ouml;schen?');"><img src="{% static "mgt/images/del.gif" %}" title="delete" /></a>
+      		</td>
+            <td class="tree-ip"><a href="/mgt/ip/{{ addr.id }}">{{ addr.address|last_part:'1' }}</a></td>
+    		<td class="tree-ip tree-status"><img src="{% static "mgt/images/"|add:addr.status|add:'.gif' %}" title="{{addr.status}}"/></td>
+			<td class="tree-ip">{{ addr.name }}</td>
+            <td class="tree-ip">
+                {% for host in addr.host.all %}
+  		            {% if not forloop.first %}
+                    , 
+                    {% endif %}
+                    {{ host.name|uqdn}}
+                {% endfor %}
+            </td>
+			<td class="tree-ip">{{ addr.interface }}</td>
+			<td class="tree-ip"></td>
+			<td class="tree-ip">{{ addr.purpose }}</td>
+	  	</tr>
+    {% empty %}
+  		<tr class="tree-all">
+      		<td class="tree-indent" colspan=8>
+        		<a href="/mgt/range/{{ range.id }}/add/">
+          			<img src="{% static "mgt/images/add.gif" %}" title="add"/>
+        		</a>
+      		</td>
+		</tr>
+  	{% endfor %}
+      </table>
+  </div>
+ 	{% endfor %}
+{% if not node.is_leaf_node %}
+{{ children }}
+{% endif %}
+</div>
+{% endrecursetree %}
