@@ -1,0 +1,120 @@
+
+/* general */
+
+.defaults {
+  font-size: 8pt;
+  font-family: sans-serif;
+  background: #F8F8F8;
+}
+
+/* table */
+
+.tree {
+  border-collapse: collapse;
+  border-style: none;
+  table-layout: fixed;
+  empty-cells: show;
+  width: 98%
+}
+
+.tree-all {
+  width: 100%;
+  border-collapse: collapse;
+  padding-top: 0px;
+  padding-right: 1px;
+  padding-bottom: 0px;
+  padding-left: 1px;
+  color: black;
+  font-size:8pt;
+  font-family:sans-serif;
+  /*border-top: 1px solid #F8F8F8;*/
+  /*border-bottom: 1px solid #F8F8F8;*/
+  background: #F8F8F8;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+
+.netblock {
+  color: white;
+  font-weight: 700;
+  background: #9080C0;
+  position:relative;
+  left:2em;
+}
+
+.subnet {
+  color: white;
+  position:relative;
+  font-weight: 700;
+  /*background: #3366FF;
+  background: #33DDFF;*/
+  background: #A0C0FF;
+}
+
+.range {
+  position:relative;
+  font-weight: 700;
+  /*background: #99CCFF;*/
+  background: #C0ECFF;
+}
+
+.tree-subhead {
+  background: #EEEEEE;
+}
+
+.tree-ip {
+  background: #D0FFFF;
+}
+
+.tree-invis {
+  color: #F8F8F8;
+}
+
+.pad-left-0 {
+  padding-left: 0px;
+}
+
+.tree-indent-0 {
+  /*padding-left: 0em;*/
+  padding-left: 0px;
+}
+
+.tree-indent-1 {
+  /*padding-left: 1em;*/
+  padding-left: 20px;
+}
+
+
+.tw-0 {
+	width:250px;
+}
+
+.tw-1 {
+	width:230px;
+}
+
+.tw-2 {
+	width:210px;
+}
+
+.tw-3 {
+	width:190px;
+}
+
+.tw-4 {
+	width:170px;
+}
+
+.tree-more-ip {
+  color: #00C000;
+}
+
+.tree-more-text {
+  color: #00B000;
+}
+
+.metadate {
+  font-size:small;
+  color: #00C000;
+}

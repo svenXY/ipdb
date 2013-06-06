@@ -1,0 +1,35 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'mgt/formate.css' %}" />
+
+<h3>Host {{ host.name }}</h3>
+<table>
+    <tr>
+        <td style="background-color:silver"><a href="{% url 'host_edit' host.id %}">&Auml;ndern</a></td>
+        <td style="background-color:silver"><a href="{% url 'host_delete' host.id %}"  onclick="return confirm('Wirklich den Host löschen?');">L&ouml;schen</a></td>
+    </tr>
+</table>
+<br>
+<h2>{{ host.name }}</h2>
+<h3>Interfaces</h3>
+<ul>
+{% if host.ipaddress_set.all %}
+{% for ipaddress in host.ipaddress_set.all %}
+    <li><a href="{% url 'ip_detail'  ipaddress.id %}">{{ ipaddress.address }}</a> - {{ipaddress.name}}) ({{ipaddress.status}})</li>
+{% endfor %}
+{% else %}
+    <li>Keine Interfaces bisher.
+{% endif %}
+</ul>
+
+<hr>
+<table class="metadate">
+<tr>
+<td>erstellt</td><td>{{ host.created }}</td>
+</tr>
+<tr>
+<td>zuletzt ge&auml;ndert</td><td>{{ host.modified }} (vor {{ host.modified|timesince }})</td>
+</tr>
+</table>
+<hr>
+
