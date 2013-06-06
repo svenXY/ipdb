@@ -9,7 +9,7 @@
 # 
 ###################################################
 
-from mgt.models import Netgroup, Network, Range, Vlan, IpAddress, Host
+from .models import Netgroup, Network, Range, Vlan, IpAddress, Host
 from django.contrib import admin
 from mptt.admin import MPTTModelAdmin
 

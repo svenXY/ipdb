@@ -9,8 +9,8 @@ urlpatterns = patterns('',
     # url(r'^$', 'ipdb.views.home', name='home'),
     # url(r'^ipdb/', include('ipdb.foo.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    #url(r'^mgt/',   'ipdb_mptt.mgt.views.index', name='index'),
-    url(r'^mgt/',   include('ipdb_neu.mgt.urls')),
+    #url(r'^ip/',   'ipdb_mptt.ip.views.index', name='index'),
+    url(r'^ip/',   include('ipdb.ip.urls')),
 
     #url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 )

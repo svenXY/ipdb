@@ -10,7 +10,7 @@
 ###################################################
 
 
-from mgt.models import Netgroup, Network, Range, IpAddress
+from .models import IpAddress
 from django.forms import ModelForm
 
 class Ip4AddressForm(ModelForm):

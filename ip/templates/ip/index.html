@@ -2,8 +2,8 @@
 {% load staticfiles %}
 {% load ip_filter %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'mgt/formate.css' %}">
-<script type="text/javascript" src="{% static 'mgt/jquery.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'ip/formate.css' %}">
+<script type="text/javascript" src="{% static 'ip/jquery.js' %}"></script>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -46,8 +46,8 @@ $(document).ready(function() {
   		{% if forloop.first %}
   		<tr class="tree-all tree-subhead">
     		<td style="width:60px;">
-      			<a href="/mgt/range/{{ range.id }}/add/">
-					<img src="{% static "mgt/images/add.gif" %}" title="add" align="right"/>
+      			<a href="/ip/range/{{ range.id }}/add/">
+					<img src="{% static "ip/images/add.gif" %}" title="add" align="right"/>
       			</a>
     		</td>
     		<td style="width:30px;">IP</td>
@@ -62,11 +62,11 @@ $(document).ready(function() {
   		{% endif %}
   		<tr class="tree-all">
       		<td class="tree-indent" style="text-align:right;">
-       			<a href="/mgt/ip/{{ addr.id }}/edit"><img src="{% static "mgt/images/edit.gif" %}" title="edit" /></a>
-       			<a href="/mgt/ip/{{ addr.id }}/del"  onclick="return confirm('Wirklich die IP Adresse {{ addr.address }} l&ouml;schen?');"><img src="{% static "mgt/images/del.gif" %}" title="delete" /></a>
+       			<a href="/ip/ip/{{ addr.id }}/edit"><img src="{% static "ip/images/edit.gif" %}" title="edit" /></a>
+       			<a href="/ip/ip/{{ addr.id }}/del"  onclick="return confirm('Wirklich die IP Adresse {{ addr.address }} l&ouml;schen?');"><img src="{% static "ip/images/del.gif" %}" title="delete" /></a>
       		</td>
-            <td class="tree-ip"><a href="/mgt/ip/{{ addr.id }}">{{ addr.address|last_part:'1' }}</a></td>
-    		<td class="tree-ip tree-status"><img src="{% static "mgt/images/"|add:addr.status|add:'.gif' %}" title="{{addr.status}}"/></td>
+            <td class="tree-ip"><a href="/ip/ip/{{ addr.id }}">{{ addr.address|last_part:'1' }}</a></td>
+    		<td class="tree-ip tree-status"><img src="{% static "ip/images/"|add:addr.status|add:'.gif' %}" title="{{addr.status}}"/></td>
 			<td class="tree-ip">{{ addr.name }}</td>
             <td class="tree-ip">
                 {% for host in addr.host.all %}
@@ -83,8 +83,8 @@ $(document).ready(function() {
     {% empty %}
   		<tr class="tree-all">
       		<td class="tree-indent" colspan=8>
-        		<a href="/mgt/range/{{ range.id }}/add/">
-          			<img src="{% static "mgt/images/add.gif" %}" title="add"/>
+        		<a href="/ip/range/{{ range.id }}/add/">
+          			<img src="{% static "ip/images/add.gif" %}" title="add"/>
         		</a>
       		</td>
 		</tr>

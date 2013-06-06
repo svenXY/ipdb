@@ -106,7 +106,7 @@ MIDDLEWARE_CLASSES = (
     'middleware.StripWhitespaceMiddleware',
 )
 
-ROOT_URLCONF = 'ipdb_neu.urls'
+ROOT_URLCONF = 'ipdb.urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -125,7 +125,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'mptt',
-    'mgt',
+    'ip',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -139,7 +139,8 @@ LOGGING = {
     'handlers': {
         'mail_admins': {
             'level': 'ERROR',
-            'class': 'django.utils.log.AdminEmailHandler'
+            'class': 'django.utils.log.AdminEmailHandler',
+            'filters': []
         }
     },
     'loggers': {
