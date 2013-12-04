@@ -7,6 +7,6 @@ Requirements
 ------------
 
 - python 2.7 and the following modules:
-- django
-- django-mptt
-- ipaddess
+  - django
+  - django-mptt
+  - ipaddress
