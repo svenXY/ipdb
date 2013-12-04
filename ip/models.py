@@ -166,7 +166,7 @@ class IpAddress(models.Model):
                                     null=True)
     base_interface = models.BooleanField('Basis-Interface?', default=False)
     global_interface = models.BooleanField('Global generieren?', default=False)
-    name = models.CharField('Interface Name', help_text='DNS-Name up to denic.de', max_length=50, blank=True)
+    name = models.CharField('Interface Name', help_text='DNS-Name up to "company".de', max_length=50, blank=True)
     host = models.ManyToManyField(Host, verbose_name='hostname', 
                                   help_text='FQDN de(r|s) Hosts, der das Interface bekommt', 
                                   blank=True)
