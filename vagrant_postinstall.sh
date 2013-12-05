@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # install and configure python 2.7 and some modules
 
 PYTHONVER='2.7.5'
