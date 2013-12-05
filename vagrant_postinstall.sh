@@ -1,5 +1,13 @@
 # install and configure python 2.7 and some modules
 
+PYTHONVER='2.7.6'
+DISTRIBVER='0.7.3'
+
+if [ ! "$USER" == "vagrant" ]; then
+	echo "Please only ever run this within vagrant as user vagrant"
+	exit 99
+fi
+
 export PATH=$PATH:/usr/local/bin
 cd
 
@@ -8,23 +16,23 @@ sudo yum install -y zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-de
 
 if [ ! -f /usr/local/bin/python2.7 ]; then
 	echo "Install python2.7"
-	wget http://python.org/ftp/python/2.7.3/Python-2.7.3.tar.bz2
-	tar xf Python-2.7.3.tar.bz2
-	cd Python-2.7.3
+	wget http://python.org/ftp/python/${PYTHONVER}/Python-${PYTHONVER}.tar.bz2
+	tar xf Python-${PYTHONVER}.tar.bz2
+	cd Python-${PYTHONVER}
 	./configure --prefix=/usr/local
 	make && sudo make altinstall
         cd .. 
-	rm -rf Python-2.7.3
+	rm -rf Python-${PYTHONVER}
 fi
 
 if [ ! -f /usr/local/bin/easy_install-2.7 ]; then
 	echo "Install distribute"
-	wget --no-check-certificate http://pypi.python.org/packages/source/d/distribute/distribute-0.6.35.tar.gz
-	tar xf distribute-0.6.35.tar.gz
-	cd distribute-0.6.35
+	wget --no-check-certificate http://pypi.python.org/packages/source/d/distribute/distribute-${DISTRIBVER}.tar.gz
+	tar xf distribute-${DISTRIBVER}.tar.gz
+	cd distribute-${DISTRIBVER}
 	sudo /usr/local/bin/python2.7 setup.py install
         cd .. 
-        rm -rf distribute-0.6.35
+        rm -rf distribute-${DISTRIBVER}
 fi
 
 if [ ! -f /usr/local/bin/virtualenv-2.7 ]; then
