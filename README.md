@@ -28,6 +28,7 @@ This source code supports vagrant, so to get a working django environment, you c
     - and will install there: django, django-mptt, ipaddress and ipython for comfortability
   - you can re-run this script, it will only ever try to do things it hasn't achieved before
 - After having done that, you can type "source $HOME/django/bin/activate" to activate the new virtualenv
+- Now type "cd /vagrant" to get to your source code which is shared there
 - Then either type
   - ./manage.py syncdb
     - to set up the database if not already done so
