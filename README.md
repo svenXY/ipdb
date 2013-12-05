@@ -34,7 +34,7 @@ This source code supports vagrant, so to get a working django environment, you c
     - to set up the database if not already done so
     - (do not create an admin user, it's already in the json file)
 - or run
-  - ./manage.py runserver 0.0.0.0:8080
+  - ./manage.py runserver 0.0.0.0:8000
     - This will also make it available on your host-machine under
       - http://127.0.0.1:8000/ip
       - or
