@@ -1,7 +1,7 @@
 # install and configure python 2.7 and some modules
 
-PYTHONVER='2.7.6'
-DISTRIBVER='0.7.3'
+PYTHONVER='2.7.5'
+DISTRIBVER='0.6.9'
 
 if [ ! "$USER" == "vagrant" ]; then
 	echo "Please only ever run this within vagrant as user vagrant"
@@ -50,4 +50,21 @@ pip install django-mptt
 pip install ipaddress
 pip install ipython
 
+cd /vagrant
+
 echo "All set up, now type 'source $HOME/django/bin/activate' to activate the new virtualenv"
+echo ""
+echo "Then either type"
+echo "./manage.py syncdb"
+echo "to set up the database if not already done so "
+echo "(do not create an admin user, it's already in the json file),"
+echo "or run"
+echo "./manage.py runserver 0.0.0.0:8080"
+echo "to start the test-webserver." 
+echo ""
+echo "This will also make it available on your host-machine under"
+echo "http://127.0.0.1:8000/ip or"
+echo "or"
+echo "http://127.0.0.1:8000/admin for the admin interface (creds: test/test)"
+echo ""
+echo "Happy django'ing!"
