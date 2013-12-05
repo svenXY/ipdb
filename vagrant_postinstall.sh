@@ -52,10 +52,10 @@ pip install django-mptt
 pip install ipaddress
 pip install ipython
 
-cd /vagrant
 
 echo "All set up, now type 'source $HOME/django/bin/activate' to activate the new virtualenv"
 echo ""
+echo "cd /vagrant # to get to the source code that is shared into /vagrant"
 echo "Then either type"
 echo "./manage.py syncdb"
 echo "to set up the database if not already done so "
